@@ -1946,8 +1946,9 @@ database_alloc(VALUE klass)
 static VALUE
 rb_database_initialize(int argc, VALUE *argv, VALUE self)
 {
-	VALUE arg[3], version;
-	VALUE server_type, major, minor, os, level, full;
+	VALUE arg[3];
+	//VALUE arg[3], version;
+	//VALUE server_type, major, minor, os, level, full;
 	database_t *dbt;
 
 	EXEC SQL begin declare section;
@@ -2015,12 +2016,12 @@ rb_database_initialize(int argc, VALUE *argv, VALUE self)
 			  into :c_version from systables where tabid = 1;
 
 
-	server_type = rb_str_new2(c_version.server_type);
-	major = rb_str_new2(c_version.major);
-	minor = rb_str_new2(c_version.minor);
-	os = rb_str_new2(c_version.os);
-	level = rb_str_new2(c_version.level);
-	full = rb_str_new2(c_version.full);
+	VALUE server_type = rb_str_new2(c_version.server_type);
+	VALUE major = rb_str_new2(c_version.major);
+	VALUE minor = rb_str_new2(c_version.minor);
+	VALUE os = rb_str_new2(c_version.os);
+	VALUE level = rb_str_new2(c_version.level);
+	VALUE full = rb_str_new2(c_version.full);
 
 	OBJ_FREEZE(server_type);
 	OBJ_FREEZE(major);
@@ -2029,8 +2030,7 @@ rb_database_initialize(int argc, VALUE *argv, VALUE self)
 	OBJ_FREEZE(level);
 	OBJ_FREEZE(full);
 
-
-	version = rb_struct_new(rb_cIfxVersion, server_type, major, minor, os,
+	VALUE version = rb_struct_new(rb_cIfxVersion, server_type, major, minor, os,
 							level, full, NULL);
 	OBJ_FREEZE(version);
 	rb_iv_set(self, "@version", version);
