@@ -1,4 +1,7 @@
+
 = Ruby/Informix -- Ruby library for connecting to IBM Informix.
+
+= This fork should compile on Mac OS 10.10 (clang) with Ruby 2.2.
 
 == Motivation
 The situation that started it all [link][http://santanatechnotes.blogspot.com/2006/03/informix-driver-for-ruby.html].
